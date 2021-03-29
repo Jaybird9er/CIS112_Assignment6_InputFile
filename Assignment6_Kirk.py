@@ -7,7 +7,6 @@ Description: User creates txt file and inputs text
 
 import os
 import re
-import pathlib
 
 def checkStart (fileName):
     """ 
