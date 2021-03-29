@@ -5,6 +5,7 @@ Assignment: 6
 Description: User creates txt file and inputs text
 """
 
+import os
 import re
 import pathlib
 
@@ -44,11 +45,21 @@ def hasExtension (fileName):
     else:
         return True
 
+def enterLine (strLine):
+    """
+    take input and append '\n'
+    """
+    return strLine + '\n'
 
-filePath = pathlib.Path(r"/Users/birdsmini/Documents/PCC/CIS 112/Code/Assignments/06" )
-print(filePath)
+cwdPath = pathlib.Path.cwd()
+print(cwdPath)
 
-## inner loop evaluates file name and terminates if all conditions are true
+test = "test"
+print(enterLine(test))
+
+## outer loop confirms whether user wants to create another file
+
+## 1st inner loop evaluates file name and terminates if all conditions are true
 fileName = input("Please enter a filename: ")
 testFileName = True
 while (testFileName):
@@ -57,6 +68,23 @@ while (testFileName):
     else:
         fileName = input("Plese enter a proper filename: ")
 
+## file is created with 1st inner loop file name
+fHand = open(fileName, mode = 'w')
+isWriting = True
 
+## 2nd inner loop enters strings into file
+while (isWriting):
+    strLine = input("Please enter a sentence: ")
+    fHand.write(enterLine(strLine))
+    keepWriting = input("Do you want to add more lines? (Y/N) ")
+    if keepWriting == 'n' or keepWriting == 'N':
+        isWriting = False
 
-
+print("This is what's entered into file ", fileName, ".", sep="")
+fHand.close()
+print("=============================")
+fHand = open(fileName)
+for line in fHand:
+    print(line, end='')
+print("=============================")
+fHand.close()
