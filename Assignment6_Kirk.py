@@ -13,7 +13,7 @@ def startABCorUS (fileName):
     """
     groupName = re.search('(^[a-z]|[A-Z]|\_)', fileName)
     if groupName:
-        return groupName.group()
+        return True
     else:
         return "The first character of the file name must be an alphabetical letter or '_'."
 
@@ -21,7 +21,14 @@ def hasABCorDigitsorUS (fileName):
     """ 
     name consists of digits, or alphabetical or "_" characters
     """
-    pass
+    spaceCheck = re.sub('\s', '', fileName)
+    groupName = re.search('\W', fileName)
+    if len(spaceCheck) != len(fileName):
+        return "Filename can contain only digits, letters, or '_'."
+    elif groupName:
+        return "Filename can contain only digits, letters, or '_'."
+    else:
+        return True
 
 def noSpecialChar (fileName):
     """ 
@@ -37,4 +44,5 @@ def hasExtension (fileName):
 
 fileName = input("Please enter a filename: ")
 #print(startABCorUS(fileName))
-
+print(hasABCorDigitsorUS(fileName))
+#print(re.sub('\s', '', fileName))
